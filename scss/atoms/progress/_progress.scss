@@ -1,0 +1,52 @@
+@import
+	"dist/chassis",
+	"mixins";
+
+meter {
+	appearance: none;
+	@include ui-meter();
+
+	&::-webkit-meter-bar {
+		background: $color-gray;
+	}
+	@include ui-meter-optimum-variations() {
+		@include ui-meter-value( $ui-meter-optimum-color, $ui-meter-optimum-background );
+	}
+
+	@include ui-meter-suboptimum-variations() {
+		@include ui-meter-value( $ui-meter-suboptimum-color, $ui-meter-suboptimum-background );
+	}
+	@include ui-meter-bad-variations() {
+		@include ui-meter-value( $ui-meter-bad-color, $ui-meter-bad-background );
+	}
+
+	&.ui_meter--striped {
+		@include ui-meter-variations() {
+			@include ui-stripes();
+		}
+	}
+}
+
+
+.ui-meter {
+	padding: 0;
+
+	&--default {
+		@include ui-meter-fallback( $ui-meter-optimum-color, $ui-meter-optimum-background );
+		&--striped {
+			@include ui-meter-fallback-stripes( $ui-meter-optimum-color, $ui-meter-optimum-background );
+		}
+	}
+	&--warning {
+		@include ui-meter-fallback( $ui-meter-suboptimum-color, $ui-meter-suboptimum-background );
+		&--striped {
+			@include ui-meter-fallback-stripes( $ui-meter-suboptimum-color, $ui-meter-suboptimum-background );
+		}
+	}
+	&--error {
+		@include ui-meter-fallback( $ui-meter-bad-color, $ui-meter-bad-background );
+		&--striped {
+			@include ui-meter-fallback-stripes( $ui-meter-bad-color, $ui-meter-bad-background );
+		}
+	}
+}

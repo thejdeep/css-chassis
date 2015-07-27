@@ -1,0 +1,103 @@
+// Mixins
+
+// General
+@mixin ui-stripes() {
+	background-image: linear-gradient(to bottom right, rgba(255, 255, 255, .3) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .3) 50%, rgba(255, 255, 255, .3) 75%, transparent 75%, transparent);
+	background-size: 50px 50px;
+}
+
+@keyframes ui-stripes-animate {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 50px 50px;
+	}
+}
+
+//General Meter
+
+@mixin ui-meter {
+	width: $ui-meter-width;
+	border-radius: $ui-meter-border-radius;
+	height: $ui-meter-height;
+	outline: $ui-meter-border-size solid $ui-meter-border-color;
+	background: $color-gray;
+}
+
+@mixin ui-meter-value( $fgcolor, $bgcolor ) {
+	background: $bgcolor;
+	color: $fgcolor;
+	box-shadow: 0 2px 1px -1px rgba(0,0,0,.4);
+}
+
+
+// Meter ELement
+@mixin ui-meter-variations() {
+	@include ui-meter-optimum-variations() {
+		@content;
+	}
+
+	@include ui-meter-suboptimum-variations() {
+		@content;
+	}
+	@include ui-meter-bad-variations() {
+		@content;
+	}
+}
+
+
+@mixin ui-meter-optimum-variations() {
+	&::-webkit-meter-optimum-value {
+		@content;
+	}
+	&:-moz-meter-optimum::-moz-meter-bar {
+		@content;
+	}
+}
+
+@mixin ui-meter-suboptimum-variations() {
+	&::-webkit-meter-suboptimum-value {
+		@content;
+	}
+	&:-moz-meter-sub-optimum::-moz-meter-bar {
+		@content;
+	}
+}
+
+@mixin ui-meter-bad-variations() {
+	&::-webkit-meter-even-less-good-value {
+		@content;
+	}
+	&:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+		@content;
+	}
+}
+
+// meter  fallback
+
+@mixin ui-meter-fallback( $fgcolor, $bgcolor ) {
+	display: inline-block;
+	@include ui-meter();
+	span {
+		display: block;
+		height: 100%;
+		text-align: center;
+		line-height: $ui-meter-height;
+		@include ui-meter-value( $fgcolor, $bgcolor );
+	}
+}
+
+@mixin ui-meter-fallback-stripes( $fgcolor, $bgcolor ) {
+	@include ui-meter-fallback( $fgcolor, $bgcolor );
+	span {
+		@include ui-stripes();
+	}
+	&--animated {
+		@include ui-meter-fallback( $fgcolor, $bgcolor );
+		span {
+			@include ui-stripes();
+			animation: ui-stripes-animate $ui-meter-animation-time linear infinite;
+		}
+	}
+}
