@@ -1,8 +1,5 @@
-<script>{
-	"title": "Chassis SCSS Style Guide"
-}</script>
 
-This page outlines the style guide for SCSS for the jQuery Chassis project.
+This page outlines the SCSS style guide for the Chassis project.
 
 ## Comments
 
@@ -19,7 +16,7 @@ SCSS comments should follow the valid CSS comment guidelines outlined in the jQu
 
 ## Cascading
 
-Avoid cascading as often as possible and follow the `BEM` naming conventions. If cascading is necessary avoid cascading selectors that are more than 3 selectors long.
+Avoid cascading and follow the `BEM` naming conventions. If cascading is necessary avoid cascading selectors that are more than 3 selectors long.
 
 ```scss
 /* 
@@ -56,8 +53,8 @@ To keep CSS consistant and easy to navigate please use the following order for e
 4. regular styles
 	- Sort declarations based on type such as padding/margin, position/top/right/bottom/left etc.
 5. pseudo classes and elements
-6. media queries
-7. nested selectors / BEM Elements / BEM Modifiers
+6. nested selectors / BEM Elements / BEM Modifiers
+7. media queries
 
 ## Breakpoints
 
@@ -111,13 +108,3 @@ All responsive styles should be written using mobile first design. In the exampl
 
 In general using @extend should be avoided. When using @extend placeholder selectors should be used in favor of regular selectors. [This article](http://www.smashingmagazine.com/2015/05/extending-in-sass-without-mess/) goes over some tips and explains good use cases for @extend. Mixins are also a great way to avoid @extend and will work inside media queries unlike @extend.
 
-## Magic Numbers
-
-[Magic Numbers](https://css-tricks.com/magic-numbers-in-css/) should be avoided but if used should include a comment stating what it is for and why it's needed.
-
-## Accessibility
-
-- Define :focus, :active and :hover for hover states on links and buttons
-- :active and :focus should also be styled for form elements such as input, textarea and select
-- Use unitless definitions for line-height to better support users who increase their font size
-- Colors selected should have a high enough contrast for color blind users
